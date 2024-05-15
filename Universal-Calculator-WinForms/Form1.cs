@@ -81,7 +81,7 @@ namespace Universal_Calculator_WinForms
         /// Обновление состояния кнопок
         private void UpdateButtons()
         {
-            foreach (Control item in Controls)
+            foreach (Control item in tabPage1.Controls)
             {
                 if (item is System.Windows.Forms.Button)
                 {
@@ -90,69 +90,36 @@ namespace Universal_Calculator_WinForms
                     if (tag < trackBar1.Value)
                     {
                         item.Enabled = true;
+                        item.BackColor = Color.Blue;
+                        item.ForeColor = SystemColors.HighlightText;
                     }
                     if (tag >= trackBar1.Value && tag <= 15)
                     {
                         item.Enabled = false;
+                        item.BackColor = Color.LightGray;
                     }
                     if ((tag == 21 || tag == 22) && ctrl.GetMemoryState() == "On")
                     {
                         item.Enabled = true;
+                        item.BackColor = Color.LightSeaGreen;
+                        item.ForeColor = SystemColors.HighlightText;
                     }
                     if ((tag == 21 || tag == 22) && ctrl.GetMemoryState() == "Off")
                     {
                         item.Enabled = false;
+                        item.BackColor = Color.LightGray;
                     }
                 }
             }
         }
 
-        // Обратотка изменения положения ползунка трекбара
+        // Обработка изменения положения ползунка трекбара
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             ctrl.pNumber.IntP = trackBar1.Value;
             textBox2.Text = ctrl.pNumber.IntP.ToString();
             UpdateButtons();
             DoCommand(19);
-        }
-
-        // Обработка изменения режима на целые числа
-        private void pNumStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pNumStripMenuItem.CheckState = CheckState.Checked;
-            fracStripMenuItem.CheckState = CheckState.Unchecked;
-            complexStripMenuItem.CheckState = CheckState.Unchecked;
-            ctrl.ChangeTCtrlMode(1);
-            trackBar1.Enabled = true;
-            button33.Enabled = false;
-            mode = "pNum";
-            UpdateButtons();
-            DoCommand(20);
-        }
-
-        // Обработка изменения режима на вещественные числа
-        private void fracStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pNumStripMenuItem.CheckState = CheckState.Unchecked;
-            fracStripMenuItem.CheckState = CheckState.Checked;
-            complexStripMenuItem.CheckState = CheckState.Unchecked;
-            ctrl.ChangeTCtrlMode(2);
-            trackBar1.Enabled = false;
-            button33.Enabled = false;
-            UpdateButtons();
-            DoCommand(20);
-        }
-
-        private void complexStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pNumStripMenuItem.CheckState = CheckState.Unchecked;
-            fracStripMenuItem.CheckState = CheckState.Unchecked;
-            complexStripMenuItem.CheckState = CheckState.Checked;
-            ctrl.ChangeTCtrlMode(3);
-            trackBar1.Enabled = false;
-            button33.Enabled = true;
-            UpdateButtons();
-            DoCommand(20);
         }
 
         // Обработка нажатия клавиш
@@ -220,6 +187,35 @@ namespace Universal_Calculator_WinForms
                 DoCommand(31);
             }
             textBox1.SelectionStart = ctrl.pNumber.StrNumber.Length;
+        }
+
+        // Обработка изменения режима на числа в СС с основанием P
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            ctrl.ChangeTCtrlMode(1);
+            trackBar1.Enabled = true;
+            button33.Enabled = false;
+            mode = "pNum";
+            UpdateButtons();
+            DoCommand(20);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            ctrl.ChangeTCtrlMode(2);
+            trackBar1.Enabled = false;
+            button33.Enabled = false;
+            UpdateButtons();
+            DoCommand(20);
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            ctrl.ChangeTCtrlMode(3);
+            trackBar1.Enabled = false;
+            button33.Enabled = true;
+            UpdateButtons();
+            DoCommand(20);
         }
     }
 }
