@@ -5,10 +5,54 @@
         private TPNumber num;
         private TPNumber dnom;
 
-        public TFrac(double n, double dn)
+        private int GCD(int a, int b)
+        {
+            return b == 0 ? a : GCD(b, a % b);
+        }
+
+        private KeyValuePair<int, int> unify_fraction(int a, int b)
+        {
+            int num = a;
+            int den = b;
+            int gcd = GCD(Math.Abs(a), Math.Abs(b));
+
+            if (gcd > 1)
+            {
+                if ((a < 0 && b < 0) || (a > 0 && b > 0))
+                {
+                    num = Math.Abs(a) / gcd;
+                    den = Math.Abs(b) / gcd;
+                }
+                else
+                {
+                    //a = a > 0 ? a / gcd : -(Math.Abs(a) / gcd);
+                    //b = b > 0 ? b / gcd : -(Math.Abs(b) / gcd);
+
+                    num = a < 0 ? a / gcd : -a / gcd;
+                    den = Math.Abs(b) / gcd;
+                }
+            }
+
+            return new KeyValuePair<int, int>(num, den);
+        }
+        public TFrac()
+        {
+            num = new TPNumber(0, 10, 8);
+            dnom = new TPNumber(1, 10, 8);
+        }
+
+        public TFrac(int n)
         {
             num = new TPNumber(n, 10, 8);
-            dnom = new TPNumber(dn, 10, 8);
+            dnom = new TPNumber(1, 10, 8);
+        }
+
+        public TFrac(double n, double dn)
+        {
+            KeyValuePair<int, int> fraction = unify_fraction(Convert.ToInt32(n), Convert.ToInt32(dn));
+
+            num = new TPNumber(fraction.Key, 10, 8);
+            dnom = new TPNumber(fraction.Value, 10, 8);
         }
 
         public override string StrNumber

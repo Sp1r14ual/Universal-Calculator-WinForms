@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Universal_Calculator_WinForms
+﻿namespace Universal_Calculator_WinForms
 {
     class FEditor : AEditor//класс редактор дроби
     {
         private PEditor _numPEditor = new PEditor();
         private PEditor _dnomPEditor = new PEditor();
-        private bool isFrac = false;
+        private bool isFrac;
 
         public override string DoEdit(int operation)
         {
@@ -22,7 +16,7 @@ namespace Universal_Calculator_WinForms
             }
             else
             {
-                if (isFrac == false)
+                if (!isFrac)
                 {
                     if (operation != 55) _numPEditor.DoEdit(operation);
                     else isFrac = true;

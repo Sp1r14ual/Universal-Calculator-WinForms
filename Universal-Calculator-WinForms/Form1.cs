@@ -195,6 +195,7 @@ namespace Universal_Calculator_WinForms
             ctrl.ChangeTCtrlMode(1);
             trackBar1.Enabled = true;
             button33.Enabled = false;
+            button33.BackColor = Color.LightGray;
             mode = "pNum";
             UpdateButtons();
             DoCommand(20);
@@ -205,6 +206,7 @@ namespace Universal_Calculator_WinForms
             ctrl.ChangeTCtrlMode(2);
             trackBar1.Enabled = false;
             button33.Enabled = false;
+            button33.BackColor = Color.LightGray;
             UpdateButtons();
             DoCommand(20);
         }
@@ -214,6 +216,7 @@ namespace Universal_Calculator_WinForms
             ctrl.ChangeTCtrlMode(3);
             trackBar1.Enabled = false;
             button33.Enabled = true;
+            button33.BackColor = Color.DodgerBlue;
             UpdateButtons();
             DoCommand(20);
         }

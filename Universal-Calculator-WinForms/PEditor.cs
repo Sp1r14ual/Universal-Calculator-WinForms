@@ -5,8 +5,8 @@
         private string number = "0";//поле числа
         private const string delim = ",";//разделитель
         private const string zero = "0";//ноль
-        private bool negative = false;//отрицательность числа
-        private bool real = false;//вещественное число
+        private bool negative;//отрицательность числа
+        private bool real;//вещественное число
 
         //сво-во получения/задания числа 
         public string Number
