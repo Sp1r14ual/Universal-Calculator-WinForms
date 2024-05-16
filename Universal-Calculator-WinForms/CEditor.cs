@@ -4,7 +4,7 @@
     {
         private PEditor _rePEditor = new PEditor();
         private PEditor _imPEditor = new PEditor();
-        private bool isComplex = false;
+        private bool isComplex;
 
         public override string DoEdit(int operation)
         {
@@ -16,7 +16,7 @@
             }
             else
             {
-                if (isComplex == false)
+                if (!isComplex)
                 {
                     if (operation != 55) _rePEditor.DoEdit(operation);
                     else isComplex = true;
