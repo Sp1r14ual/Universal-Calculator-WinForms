@@ -25,10 +25,10 @@
         internal TANumber pNumber;
 
         /// Максимальная длина целой части числа
-        private const int MAXINTLEN = 12;
+        private const int MAXINTLEN = 50; // 12
 
         /// Максимальная длина дробной части числа
-        private const int MAXFRACTLEN = 8;
+        private const int MAXFRACTLEN = 50; //8
 
         private bool determ = false;
 
